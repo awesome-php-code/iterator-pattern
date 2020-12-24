@@ -1,0 +1,25 @@
+{
+    "name": "awesome-php-code/iterator-pattern",
+    "description": "Iterator Pattern in PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Darío Rivera",
+            "email": "fermius.us@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AwesomePhpCode\\IteratorPattern\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AwesomePhpCode\\IteratorPattern\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
