@@ -2,9 +2,10 @@
 
 namespace AwesomePhpCode\IteratorPattern;
 
+use AwesomePhpCode\IteratorPattern\Contracts\RuleCollectionInterface;
 use AwesomePhpCode\IteratorPattern\Iterators\IntegerTypeIterator;
 
-class RuleCollection implements \IteratorAggregate
+class RuleCollection implements RuleCollectionInterface
 {
     /**
      * @var Rule[]

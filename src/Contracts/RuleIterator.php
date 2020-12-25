@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomePhpCode\IteratorPattern\Iterators;
+namespace AwesomePhpCode\IteratorPattern\Contracts;
 
 use AwesomePhpCode\IteratorPattern\Rule;
 

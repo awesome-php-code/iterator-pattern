@@ -3,6 +3,7 @@
 namespace AwesomePhpCode\IteratorPattern\Iterators;
 
 use AwesomePhpCode\IteratorPattern\Constants\RuleType;
+use AwesomePhpCode\IteratorPattern\Contracts\RuleIterator;
 use AwesomePhpCode\IteratorPattern\Rule;
 use AwesomePhpCode\IteratorPattern\RuleCollection;
 
