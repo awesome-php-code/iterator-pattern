@@ -32,7 +32,7 @@ class Test extends TestCase
         $evenRule = new EvenInteger('is even', 2);
         $evenRule->disable();
         $oddRule = new OddInteger('is odd', 4);
-        $length = new MaxLength('string length greater than 100', 3, 100);
+        $length = new MaxLength('string length greater than 100 characters', 3, 100);
         $greaterThanRule = new IntegerGreaterThan('greater than 50', 1, 50);
 
         $collection = new RuleCollection();
