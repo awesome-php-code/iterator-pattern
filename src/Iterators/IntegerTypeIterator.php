@@ -4,27 +4,28 @@ namespace AwesomePhpCode\IteratorPattern\Iterators;
 
 use AwesomePhpCode\IteratorPattern\Constants\RuleType;
 use AwesomePhpCode\IteratorPattern\Rule;
+use AwesomePhpCode\IteratorPattern\RuleCollection;
 
 class IntegerTypeIterator implements \Iterator
 {
-    /**
-     * @var Rule[]
-     */
-    private array $collection;
+    private RuleCollection $collection;
+
+    private array $rules = [];
 
     private int $key = 0;
 
-    public function __construct(array $collection)
+    public function __construct(RuleCollection $collection)
     {
-        $this->filterEnabled($collection);
-        $this->filterForIntegerRules($collection);
-        $this->orderByPosition($collection);
-        $this->collection = $collection;
+        $rules = $collection->getRules();
+        $this->filterEnabled($rules);
+        $this->filterForIntegerRules($rules);
+        $this->orderByPosition($rules);
+        $this->rules = $rules;
     }
 
     public function current(): Rule
     {
-        return $this->collection[$this->key];
+        return $this->rules[$this->key];
     }
 
     public function next(): void
@@ -39,7 +40,7 @@ class IntegerTypeIterator implements \Iterator
 
     public function valid(): bool
     {
-        return isset($this->collection[$this->key]);
+        return isset($this->rules[$this->key]);
     }
 
     public function rewind(): void
@@ -47,41 +48,41 @@ class IntegerTypeIterator implements \Iterator
         $this->key = 0;
     }
 
-    private function filterEnabled(array &$collection)
+    private function filterEnabled(array &$rules)
     {
-        $collection = array_filter($collection, function ($value) {
+        $rules = array_filter($rules, function ($value) {
             /** @var Rule $value */
             return $value->isEnabled();
         });
     }
 
-    private function filterForIntegerRules(array &$collection)
+    private function filterForIntegerRules(array &$rules)
     {
-        $collection = array_filter($collection, function ($value) {
+        $rules = array_filter($rules, function ($value) {
             /** @var Rule $value */
             return $value->getType() === RuleType::INTEGER;
         });
     }
 
-    private function orderByPosition(array &$collection)
+    private function orderByPosition(array &$rules)
     {
-        $positions = $this->getPositions($collection);
+        $positions = $this->getPositions($rules);
         asort($positions);
 
-        $_collection = [];
+        $_rules = [];
 
         foreach ($positions as $key => $position) {
             /** @var Rule $rule */
-            $_collection[] = $collection[$key];
+            $_rules[] = $rules[$key];
         }
 
-        $collection = $_collection;
+        $rules = $_rules;
     }
 
-    private function getPositions($collection): array
+    private function getPositions($rules): array
     {
         $positions = [];
-        foreach ($collection as $key => $rule) {
+        foreach ($rules as $key => $rule) {
             /** @var Rule $rule */
             $positions[$key] = $rule->getPosition();
         }

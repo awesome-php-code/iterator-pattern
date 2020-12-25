@@ -11,6 +11,11 @@ class RuleCollection implements \IteratorAggregate
      */
     private array $rules;
 
+    public function getRules(): array
+    {
+        return $this->rules;
+    }
+
     public function addRule(Rule $rule): void
     {
         $this->rules[] = $rule;
@@ -26,6 +31,6 @@ class RuleCollection implements \IteratorAggregate
 
     public function getIterator(): IntegerTypeIterator
     {
-        return new IntegerTypeIterator($this->rules);
+        return new IntegerTypeIterator($this);
     }
 }
