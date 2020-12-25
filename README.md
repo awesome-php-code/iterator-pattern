@@ -99,7 +99,7 @@ interface RuleCollectionAggregate extends \IteratorAggregate
 :large_blue_diamond: Step 3: Of course, we need specific implementations for these interfaces. We need a `RuleCollection` to store our `Rule` objects and
 a `IntegerTypeIterator` for iterate integer type rules. Take your time to review the following diagram.
 
-<p align="center"><img src="https://blog.pleets.org/img/articles/iterator_pattern_rules_sample.png" width="500"></p>
+<p align="center"><img src="https://blog.pleets.org/img/articles/iterator_pattern_rules_sample.png" width="483"></p>
 
 For this example we separate the logic for each rule in specific classes listed in `Rules` namespace. Feel free to dig into these classes
 before to check the client code.
