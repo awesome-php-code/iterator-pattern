@@ -8,42 +8,45 @@ Iterator is a behavioral design pattern that lets you traverse elements of a col
 
 # When to use the Iterator Pattern :question:
 
-:heavy_check_mark: Use this pattern when the logic of iteration is not usual. You could split responsibilities creating one or more classes for iterations.
+:heavy_check_mark: Use this pattern when the logic of iteration is not usual. You could split responsibilities creating one or more classes for traverse a collection.
 
-:heavy_check_mark: Use this pattern to reduce duplicated code. When no iterator is defined the code of iteration is usually created in the client side generating duplications!.
+:heavy_check_mark: Use this pattern to reduce duplicated code. When no iterator is defined the code for traverse a collection is usually created in the client side generating duplications!.
 
-:heavy_check_mark: Use the Iterator when you want your code to be able to traverse different data structures or when types of these structures are unknown beforehand.
+:heavy_check_mark: Use this pattern when you want your code to be able to traverse different data structures or when types of these structures are unknown beforehand.
 
-# What you expect of iterators :question:
+# What do you expect of iterators :question:
 
-:white_check_mark: The primary responsibility for a collection is store objects!, not traverse it!.
+:white_check_mark: The primary responsibility for collections is to store objects!, not traverse it!. So iterators must contain all logic for traverse collections. 
 
-:white_check_mark: All iterators must implement the same interface.
+:white_check_mark: All iterators must implement the same interface. This makes the client code compatible with any collection type or any traversal algorithm as long as there’s a proper iterator.
 
 :white_check_mark: The pattern provides a couple of generic interfaces for both collections and iterators.
+Given that your code now uses these interfaces, it’ll still work if you pass it various kinds of collections and iterators that implement these interfaces.
 
 For more information about this pattern you can check [this page](https://refactoring.guru/design-patterns/iterator).
-The following is the implementation of this pattern to solve a basic problem of iterating rules.
+The following is the implementation of this pattern to solve a basic problem about iterating rules.
 
-# :paperclip: The Problem
+# :round_pushpin: The Problem
 
-Imagine you need ensure that a set of rules are applied to a single value. So, in your code you have the following rules ready to be applied. 
+Imagine you need to ensure that a set of rules are applied to a single value. So, in your code you have the following rules ready to be applied. 
 
-1) The integer is odd
-2) The integer is even
-3) The string length is greater than 100 characters
-4) The integer is greater than 50
+1) An integer is odd
+2) An integer is even
+3) A string length is greater than 100 characters
+4) An integer is greater than 50
 
 As you may think, all this rules end up in a bool value to check if a given value meets the requirement. For integer values,
 you only need a subset of these rules to be applied (1, 2, 4), and for strings you only need the third rule to be applied.
-Also, each rule has a status (enabled/disabled) and a position. A rule must be applied it's enabled, if the given type match, 
-and applied id ascending order for the position field.
+Also, each rule has a status (enabled/disabled) and a position. A rule must be applied if it's enabled, if the given type match, 
+and must be applied in ascending order for the position field.
 
 # :bulb: The Solution
 
-:large_blue_diamond: Step 1: We need to declare the **iterator interface**.
+:satellite: The scope of the following solution is to create an iterator to traverse only the integer values.
+
+:large_blue_diamond: Step 1: We need to declare the **Iterator interface**.
 In PHP most of the problems can be solved through the built-in `\Iterator` interface.
-This contract defines the following operations for iterators.
+This contract defines the following operations to traverse collections.
 
 ```php
 interface Iterator extends Traversable {
@@ -55,17 +58,15 @@ interface Iterator extends Traversable {
 }
 ```
 
-`current()`: Returns the current element
+| Method   | Description |
+|---------------|-------------|
+| `current()` | Returns the current element |
+| `next()` | Moves forward to next element |
+| `key()` | Returns the key of the current element. |
+| `valid()` | Checks if current position is valid |
+| `rewind()` | Rewinds the Iterator to the first element |
 
-`next()`: Moves forward to next element.
-
-`key()`: Returns the key of the current element.
-
-`valid()`: Checks if current position is valid.
-
-`rewind()`: Rewinds the Iterator to the first element.
-
-Is a good practice to extend this interface to force current object type. In our case we need to return `Rule` type.
+Is a good practice to extend this interface to force the current object type. In our case we need to return the `Rule` type.
 
 ```php
 interface RuleIterator extends \Iterator
@@ -74,7 +75,7 @@ interface RuleIterator extends \Iterator
 }
 ```
 
-:large_blue_diamond: Step 2: We need to declare the **Iterable collection interface**.
+:large_blue_diamond: Step 2: We need to declare the **Iterable Collection interface**.
 Again, In PHP most of the problems can be solved through the built-in `\IteratorAggregate` interface.
 
 ```php
@@ -97,14 +98,14 @@ interface RuleCollectionAggregate extends \IteratorAggregate
 ```
 
 :large_blue_diamond: Step 3: Of course, we need specific implementations for these interfaces. We need a `RuleCollection` to store our `Rule` objects and
-a `IntegerTypeIterator` for iterate integer type rules. Take your time to review the following diagram.
+a `IntegerTypeIterator` to traverse the elements of this collection. Take your time to review the following diagram.
 
 <p align="center"><img src="https://blog.pleets.org/img/articles/iterator_pattern_rules_sample.png" width="483"></p>
 
 For this example we separate the logic for each rule in specific classes listed in `Rules` namespace. Feel free to dig into these classes
 before to check the client code.
 
-:large_blue_diamond: Step 4: The client can work with `RuleIterator` and `RuleCollectionAggregate` interfaces. Let's create some rules inside a collection.   
+:large_blue_diamond: Step 4: Now the client can use the `RuleIterator` and `RuleCollectionAggregate` interfaces. To do that let's create some rules inside a collection.   
 
 ```php
 /**
@@ -124,7 +125,7 @@ $collection = new RuleCollection();
 $collection->addRuleStack([$evenRule, $oddRule, $length, $greaterThanRule]);
 ```
 
-Now, the client can use the available methods for each interface.
+Now, in the client side we only have to worry about the methods of each interface.
 
 ```php
 // getIterator() method comes from RuleCollectionAggregate interface.
@@ -138,6 +139,14 @@ while ($iterator->valid()) {
     $results[] = $rule->run($value);
     $iterator->next();
 }
+
+var_dump($results);  // check results here!
 ```
 
-Let's check the test `itIteratesEnabledAndIntegerTypeRulesByPosition`.
+Let's check the `itIteratesEnabledAndIntegerTypeRulesByPosition` test to dig into this example.
+
+# :confetti_ball: Job Done :question:
+
+I think 80% getting knowledge is in practice. So, feel free to fork this project and create an iterator for string values.
+You can create more rules too, don't limit your creativity. Do not forget the unit test for your implementation and let me see
+your progress.
