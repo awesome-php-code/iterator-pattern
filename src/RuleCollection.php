@@ -2,10 +2,30 @@
 
 namespace AwesomePhpCode\IteratorPattern;
 
-class RuleCollection
+use AwesomePhpCode\IteratorPattern\Iterators\IntegerTypeIterator;
+
+class RuleCollection implements \IteratorAggregate
 {
-    public static function foo(): string
+    /**
+     * @var Rule[]
+     */
+    protected array $rules;
+
+    public function addRule(Rule $rule): void
     {
-        return 'foo';
+        $this->rules[] = $rule;
+    }
+
+    /**
+     * @param Rule[]
+     */
+    public function addRuleStack(array $rules)
+    {
+        array_map('self::addRule', $rules);
+    }
+
+    public function getIterator(): IntegerTypeIterator
+    {
+        return new IntegerTypeIterator($this->rules);
     }
 }
