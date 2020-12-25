@@ -10,9 +10,9 @@ class IntegerTypeIterator implements \Iterator
     /**
      * @var Rule[]
      */
-    protected array $collection;
+    private array $collection;
 
-    protected int $key = 0;
+    private int $key = 0;
 
     public function __construct(array $collection)
     {

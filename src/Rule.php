@@ -4,16 +4,16 @@ namespace AwesomePhpCode\IteratorPattern;
 
 class Rule
 {
-    protected string $name;
-    protected int $type;
-    protected int $position;
+    private string $name;
+    private int $type;
+    private int $position;
 
     /**
      * @var callable
      */
     protected $condition;
 
-    protected bool $enabled = true;
+    private bool $enabled = true;
 
     public function __construct(string $name, int $type, int $position, callable $condition)
     {

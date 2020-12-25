@@ -9,7 +9,7 @@ class RuleCollection implements \IteratorAggregate
     /**
      * @var Rule[]
      */
-    protected array $rules;
+    private array $rules;
 
     public function addRule(Rule $rule): void
     {
