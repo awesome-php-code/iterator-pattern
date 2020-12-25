@@ -6,7 +6,7 @@ use AwesomePhpCode\IteratorPattern\Constants\RuleType;
 use AwesomePhpCode\IteratorPattern\Rule;
 use AwesomePhpCode\IteratorPattern\RuleCollection;
 
-class IntegerTypeIterator implements \Iterator
+class IntegerTypeIterator implements RuleIterator
 {
     private RuleCollection $collection;
 
@@ -16,6 +16,7 @@ class IntegerTypeIterator implements \Iterator
 
     public function __construct(RuleCollection $collection)
     {
+        $this->collection = $collection;
         $rules = $collection->getRules();
         $this->filterEnabled($rules);
         $this->filterForIntegerRules($rules);
