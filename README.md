@@ -2,7 +2,7 @@
 
 This sample shows how the iterator pattern can be used to iterate some rules :pencil:.
 
-<a href="https://travis-ci.com/awesome-php-code/iterator-pattern"><img src="https://travis-ci.com/easy-http/guzzle-layer.svg?branch=master" alt="Build Status"></a>
+<a href="https://travis-ci.com/awesome-php-code/iterator-pattern"><img src="https://travis-ci.com/awesome-php-code/iterator-pattern.svg?branch=master" alt="Build Status"></a>
 
 # What is the Iterator Pattern :question:
 
