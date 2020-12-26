@@ -1,4 +1,4 @@
-# :pushpin: Rule Iterator Sample in PHP
+# :pushpin: Iterator Pattern Sample in PHP
 
 This sample shows how the iterator pattern can be used to iterate some rules :pencil:.
 
@@ -8,7 +8,7 @@ This sample shows how the iterator pattern can be used to iterate some rules :pe
 
 Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
 
-# When to use the Iterator Pattern :question:
+# When to use Iterator Pattern :question:
 
 :heavy_check_mark: Use this pattern when the logic of iteration is not usual. You could split responsibilities creating one or more classes for traverse a collection.
 
