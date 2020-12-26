@@ -9,6 +9,13 @@ class IntegerGreaterThan extends Rule
 {
     public function __construct(string $name, int $position, int $value)
     {
-        parent::__construct($name, RuleType::INTEGER, $position, function($test) use ($value) { return $test > $value; });
+        parent::__construct(
+            $name,
+            RuleType::INTEGER,
+            $position,
+            function ($test) use ($value) {
+                return $test > $value;
+            }
+        );
     }
 }

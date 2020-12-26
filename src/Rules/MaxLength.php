@@ -9,6 +9,13 @@ class MaxLength extends Rule
 {
     public function __construct(string $name, int $position, $value)
     {
-        parent::__construct($name, RuleType::STRING, $position, function($test) use ($value) { return mb_strlen($test) > $value; });
+        parent::__construct(
+            $name,
+            RuleType::STRING,
+            $position,
+            function ($test) use ($value) {
+                return mb_strlen($test) > $value;
+            }
+        );
     }
 }

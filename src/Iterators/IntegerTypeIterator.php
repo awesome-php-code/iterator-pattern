@@ -52,18 +52,24 @@ class IntegerTypeIterator implements RuleIterator
 
     private function filterEnabled(array &$rules)
     {
-        $rules = array_filter($rules, function ($value) {
+        $rules = array_filter(
+            $rules,
+            function ($value) {
             /** @var Rule $value */
-            return $value->isEnabled();
-        });
+                return $value->isEnabled();
+            }
+        );
     }
 
     private function filterForIntegerRules(array &$rules)
     {
-        $rules = array_filter($rules, function ($value) {
+        $rules = array_filter(
+            $rules,
+            function ($value) {
             /** @var Rule $value */
-            return $value->getType() === RuleType::INTEGER;
-        });
+                return $value->getType() === RuleType::INTEGER;
+            }
+        );
     }
 
     private function orderByPosition(array &$rules)
