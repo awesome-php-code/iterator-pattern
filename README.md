@@ -2,6 +2,8 @@
 
 This sample shows how the iterator pattern can be used to iterate some rules :pencil:.
 
+<a href="https://travis-ci.com/awesome-php-code/iterator-pattern"><img src="https://travis-ci.com/easy-http/guzzle-layer.svg?branch=master" alt="Build Status"></a>
+
 # What is the Iterator Pattern :question:
 
 Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
